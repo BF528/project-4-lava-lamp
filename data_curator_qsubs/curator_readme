@@ -1,0 +1,15 @@
+#Curator: E. Saake
+#Steps Extracting from fastq.gz
+#--------------------------------
+	#1. Extract barcodes (combining bc1 and bc2), umi and unique sample IDs [Sample-IDs,  combined_barcode, umi] using 'awk_extract_barcodes.qsu'
+		*Ideally you should extract only the barcodes 
+	#2  Count each barcode (column2 ie. $2 in awk) and output the barcode and its count to file using 'awk_get_count_qsub.qsub'
+	#2 Fetch all these into R and do filtering and whitelising. You can do that with awk if it is easier. But I did it in R.
+
+
+#Running Salmon:
+#---------------
+	#1. Run the 'prep_salmon_qsub.qsu'b to get all the decoy files and generate the index
+	#2. Run the 'tsv_qsub.qsub' to generate the tsv file required to run the salmon alignment
+	#3. Align with 'align_combined_qsub.qsub' to align and generate the count matrix
+		*You should find your needed files under the 'Alevin' directory of the generated outputs.
